@@ -5,87 +5,47 @@ class ViewController: UIViewController {
     
     var isBlack: Bool = false {
         didSet {
-            if isBlack {
-                self.view.backgroundColor = .black
-            } else {
-                self.view.backgroundColor = .white
-            }
+            self.view.backgroundColor = isBlack ? .black : .white
         }
     }
+    
+    lazy var bruteForceQueue = OperationQueue()
     
     @IBAction func onBut(_ sender: Any) {
         isBlack.toggle()
     }
     
+    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var labelPassword: UILabel!
+    
+    @IBAction func startButton(_ sender: Any) {
+        let brutForce = BruteForce(of: 3)
+        
+        textField.isSecureTextEntry = true
+        textField.text = brutForce.password
+        
+        labelPassword.text = "Подбор пароля..."
+        
+        (sender as? UIButton)?.isEnabled = false
+        
+        activityIndicator.startAnimating()
+        
+        let forcing = BruteForceOperation(brutForce)
+        forcing.completionBlock = {
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                self.labelPassword.text = forcing.password
+                self.textField.isSecureTextEntry = false
+                (sender as? UIButton)?.isEnabled = true
+            }
+        }
+        bruteForceQueue.addOperation(forcing)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        self.bruteForce(passwordToUnlock: "1!gr")
-        
-        // Do any additional setup after loading the view.
-    }
-    
-    func bruteForce(passwordToUnlock: String) {
-        let ALLOWED_CHARACTERS:   [String] = String().printable.map { String($0) }
-
-        var password: String = ""
-
-        // Will strangely ends at 0000 instead of ~~~
-        while password != passwordToUnlock { // Increase MAXIMUM_PASSWORD_SIZE value for more
-            password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
-//             Your stuff here
-            print(password)
-            // Your stuff here
-        }
-        
-        print(password)
+        activityIndicator.hidesWhenStopped = true
     }
 }
-
-
-
-extension String {
-    var digits:      String { return "0123456789" }
-    var lowercase:   String { return "abcdefghijklmnopqrstuvwxyz" }
-    var uppercase:   String { return "ABCDEFGHIJKLMNOPQRSTUVWXYZ" }
-    var punctuation: String { return "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~" }
-    var letters:     String { return lowercase + uppercase }
-    var printable:   String { return digits + letters + punctuation }
-
-
-
-    mutating func replace(at index: Int, with character: Character) {
-        var stringArray = Array(self)
-        stringArray[index] = character
-        self = String(stringArray)
-    }
-}
-
-func indexOf(character: Character, _ array: [String]) -> Int {
-    return array.firstIndex(of: String(character))!
-}
-
-func characterAt(index: Int, _ array: [String]) -> Character {
-    return index < array.count ? Character(array[index])
-                               : Character("")
-}
-
-func generateBruteForce(_ string: String, fromArray array: [String]) -> String {
-    var str: String = string
-
-    if str.count <= 0 {
-        str.append(characterAt(index: 0, array))
-    }
-    else {
-        str.replace(at: str.count - 1,
-                    with: characterAt(index: (indexOf(character: str.last!, array) + 1) % array.count, array))
-
-        if indexOf(character: str.last!, array) == 0 {
-            str = String(generateBruteForce(String(str.dropLast()), fromArray: array)) + String(str.last!)
-        }
-    }
-
-    return str
-}
-
