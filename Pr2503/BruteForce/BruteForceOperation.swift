@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol BruteForceDelegate {
+    func updateLabel(with password: String)
+}
+
 class BruteForceOperation: Operation {
     var password = ""
     var passwordToUnlock: String
+    var delegate: BruteForceDelegate?
     
     override func main() {
         if isCancelled {
@@ -28,6 +33,8 @@ class BruteForceOperation: Operation {
         // Will strangely ends at 0000 instead of ~~~
         while password != passwordToUnlock { // Increase MAXIMUM_PASSWORD_SIZE value for more
             password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
+            print(password)
+            delegate?.updateLabel(with: password)
         }
     }
 

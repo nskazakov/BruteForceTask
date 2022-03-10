@@ -1,7 +1,13 @@
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, BruteForceDelegate {
     @IBOutlet weak var button: UIButton!
+    
+    func updateLabel(with password: String) {
+        DispatchQueue.main.async {
+            self.labelPassword.text = password
+        }
+    }
     
     var isBlack: Bool = false {
         didSet {
@@ -37,6 +43,7 @@ class ViewController: UIViewController {
         activityIndicator.startAnimating()
         
         let forcing = BruteForceOperation(password: password)
+        forcing.delegate = self
         forcing.completionBlock = {
             DispatchQueue.main.async {
                 self.activityIndicator.stopAnimating()
@@ -47,14 +54,14 @@ class ViewController: UIViewController {
         }
         bruteForceQueue.addOperation(forcing)
         
-        let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-            self.labelPassword.text = forcing.password
-            print(forcing.password)
-            if !forcing.isExecuting {
-                timer.invalidate()
-            }
-        }
-        timer.fire()
+//        let timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+//            self.labelPassword.text = forcing.password
+//            print(forcing.password)
+//            if !forcing.isExecuting {
+//                timer.invalidate()
+//            }
+//        }
+//        timer.fire()
     }
     
     override func viewDidLoad() {
