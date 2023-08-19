@@ -20,6 +20,8 @@ class ViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate 
                 self.view.backgroundColor = .systemGray
             } else {
                 self.view.backgroundColor = .white
+                textField.text = ""
+                label.text = ""
             }
         }
     }
@@ -46,7 +48,7 @@ class ViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.isHidden = true
-
+        
         textField.delegate = self
         self.textField.isSecureTextEntry = true
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
@@ -59,28 +61,23 @@ class ViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate 
         label.text = ""
         return textField.text = generatePassword(count: 3)
     }
-   
+    
     @IBAction func touchBruteForce(_ sender: Any) {
         if textField.text != "" {
             
-            DispatchQueue.global(qos: .userInitiated).async {
+            
+            DispatchQueue.global(qos: .utility).async {
                 
                 DispatchQueue.main.async {
-                    self.activityIndicator.isHidden = false
+                    self.bruteForce(passwordToUnlock: self.textField.text ?? "error")
                     self.activityIndicator.startAnimating()
-                    
-                    DispatchQueue.main.async {
-                        self.bruteForce(passwordToUnlock: self.textField.text ?? "error")
-                        self.activityIndicator.isHidden = true
-                        self.activityIndicator.stopAnimating()
-                        self.textField.isSecureTextEntry = false
-                        self.label.text = "Пароль взломан - \( self.textField.text ?? "" )"
-                    }
+                    self.activityIndicator.isHidden = false
                 }
             }
         } else {
             self.activityIndicator.isHidden = true
-            
+            self.activityIndicator.stopAnimating()
+
             self.label.text = "Generate \t password please"
         }
     }
@@ -92,16 +89,27 @@ class ViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate 
     // MARK: BruteForce
     
     func bruteForce(passwordToUnlock: String) {
-        let ALLOWED_CHARACTERS:   [String] = String().printable.map { String($0) }
-        
-        var password: String = ""
-        
-        while password != passwordToUnlock {
-            password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
-            print(password)
+        DispatchQueue.global(qos: .utility).async {
+            
+            let ALLOWED_CHARACTERS:   [String] = String().printable.map { String($0) }
+            
+            var password: String = ""
+            
+            while password != passwordToUnlock {
+                password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
+                print(password)
+                
+                DispatchQueue.main.async {
+                    self.label.text =  password
+                }
+            }
+            DispatchQueue.main.async {
+                self.label.text = "Пароль взломан - \( self.textField.text ?? "" )"
+                self.textField.isSecureTextEntry = false
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
+            }
         }
-        
-        print(password)
     }
 }
 
