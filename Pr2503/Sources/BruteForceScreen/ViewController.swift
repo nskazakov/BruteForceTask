@@ -13,7 +13,7 @@ class ViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate 
     @IBOutlet weak var label: UILabel!
     
     @IBOutlet weak var buttonGenerate: UIButton!
-    
+        
     var isBlack: Bool = false {
         didSet {
             if isBlack {
@@ -62,22 +62,23 @@ class ViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate 
         return textField.text = generatePassword(count: 3)
     }
     
+    
     @IBAction func touchBruteForce(_ sender: Any) {
-        if textField.text != "" {
-            
-            
-            DispatchQueue.global(qos: .utility).async {
                 
+        if textField.text != "" {
+
+            DispatchQueue.global(qos: .utility).async {
+
                 DispatchQueue.main.async {
                     self.bruteForce(passwordToUnlock: self.textField.text ?? "error")
                     self.activityIndicator.startAnimating()
                     self.activityIndicator.isHidden = false
                 }
             }
+
         } else {
             self.activityIndicator.isHidden = true
             self.activityIndicator.stopAnimating()
-
             self.label.text = "Generate \t password please"
         }
     }
