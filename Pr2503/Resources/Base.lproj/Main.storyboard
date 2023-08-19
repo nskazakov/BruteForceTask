@@ -31,6 +31,10 @@
                                 <rect key="frame" x="126" y="294" width="172" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Generate password"/>
+                                <connections>
+                                    <action selector="TouchGenerate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rvI-X5-ruz"/>
+                                    <action selector="touchGenerate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dko-7p-1bM"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="und-di-Vma">
                                 <rect key="frame" x="96" y="197" width="232" height="34"/>
@@ -46,6 +50,7 @@
                                 <state key="normal" title="Brute Force"/>
                                 <connections>
                                     <action selector="onBut:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XD4-sb-XPE"/>
+                                    <action selector="touchBruteForce:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gIF-Wg-GDb"/>
                                 </connections>
                             </button>
                         </subviews>
