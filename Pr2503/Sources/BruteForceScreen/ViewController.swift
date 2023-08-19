@@ -1,7 +1,16 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    // MARK: Outlets
+
     @IBOutlet weak var button: UIButton!
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var buttonGenerate: UIButton!
     
     var isBlack: Bool = false {
         didSet {
@@ -13,19 +22,22 @@ class ViewController: UIViewController {
         }
     }
     
+    // MARK: Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+       
+    }
+    
+    
+    // MARK: Actions
+
     @IBAction func onBut(_ sender: Any) {
         isBlack.toggle()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-        self.bruteForce(passwordToUnlock: "1!gr")
-        
-        // Do any additional setup after loading the view.
-    }
-    
+    // MARK: BruteForce
+
     func bruteForce(passwordToUnlock: String) {
         let ALLOWED_CHARACTERS:   [String] = String().printable.map { String($0) }
 
@@ -43,8 +55,6 @@ class ViewController: UIViewController {
     }
 }
 
-
-
 extension String {
     var digits:      String { return "0123456789" }
     var lowercase:   String { return "abcdefghijklmnopqrstuvwxyz" }
@@ -52,8 +62,6 @@ extension String {
     var punctuation: String { return "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~" }
     var letters:     String { return lowercase + uppercase }
     var printable:   String { return digits + letters + punctuation }
-
-
 
     mutating func replace(at index: Int, with character: Character) {
         var stringArray = Array(self)
