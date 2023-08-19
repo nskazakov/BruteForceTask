@@ -19,33 +19,32 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHZ-ir-LwU">
-                                <rect key="frame" x="96" y="89" width="232" height="91"/>
+                                <rect key="frame" x="96" y="78" width="232" height="91"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="91" id="lu1-8u-byd"/>
+                                    <constraint firstAttribute="height" constant="91" id="5VC-1m-TR6"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" name="AccentColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bmn-RZ-Uqa">
+                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bmn-RZ-Uqa">
                                 <rect key="frame" x="126" y="294" width="172" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Generate password"/>
                                 <connections>
-                                    <action selector="TouchGenerate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rvI-X5-ruz"/>
-                                    <action selector="touchGenerate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dko-7p-1bM"/>
+                                    <action selector="generatorPassword:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0y7-yC-Dcx"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="und-di-Vma">
-                                <rect key="frame" x="96" y="197" width="232" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="und-di-Vma">
+                                <rect key="frame" x="96" y="220" width="232" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="TWr-4E-T4c"/>
+                                </constraints>
                                 <color key="textColor" name="AccentColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="EKq-yM-Grf">
-                                <rect key="frame" x="197" y="257" width="20" height="20"/>
-                            </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3g4-cd-RKK">
+                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3g4-cd-RKK">
                                 <rect key="frame" x="167" y="392" width="80" height="30"/>
                                 <state key="normal" title="Brute Force"/>
                                 <connections>
@@ -53,22 +52,25 @@
                                     <action selector="touchBruteForce:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gIF-Wg-GDb"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="EKq-yM-Grf">
+                                <rect key="frame" x="197" y="266" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Bmn-RZ-Uqa" firstAttribute="top" secondItem="EKq-yM-Grf" secondAttribute="bottom" constant="17" id="3yd-Zp-AVN"/>
-                            <constraint firstItem="eHZ-ir-LwU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="41" id="4ne-ok-xcW"/>
-                            <constraint firstItem="Bmn-RZ-Uqa" firstAttribute="centerX" secondItem="und-di-Vma" secondAttribute="centerX" id="5bV-nN-edA"/>
-                            <constraint firstItem="und-di-Vma" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="96" id="7kd-Xs-DQf"/>
-                            <constraint firstItem="eHZ-ir-LwU" firstAttribute="trailing" secondItem="und-di-Vma" secondAttribute="trailing" id="Kag-Ca-KXz"/>
+                            <constraint firstItem="Bmn-RZ-Uqa" firstAttribute="top" secondItem="EKq-yM-Grf" secondAttribute="bottom" constant="8" id="0xI-8I-gxd"/>
+                            <constraint firstItem="und-di-Vma" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="96" id="26D-jR-iJm"/>
+                            <constraint firstItem="und-di-Vma" firstAttribute="centerX" secondItem="Bmn-RZ-Uqa" secondAttribute="centerX" id="BEp-X7-Ago"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="und-di-Vma" secondAttribute="trailing" constant="86" id="Loq-KU-H9q"/>
                             <constraint firstItem="3g4-cd-RKK" firstAttribute="top" secondItem="Bmn-RZ-Uqa" secondAttribute="bottom" constant="63" id="N44-eg-JX4"/>
+                            <constraint firstItem="und-di-Vma" firstAttribute="trailing" secondItem="eHZ-ir-LwU" secondAttribute="trailing" id="NMb-9E-ozu"/>
                             <constraint firstItem="3g4-cd-RKK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PUe-7S-THt"/>
-                            <constraint firstItem="3g4-cd-RKK" firstAttribute="centerX" secondItem="EKq-yM-Grf" secondAttribute="centerX" id="ZB9-aB-xE7"/>
+                            <constraint firstItem="eHZ-ir-LwU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="bxp-64-7VV"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="3g4-cd-RKK" secondAttribute="bottom" constant="440" id="dSS-TS-RBn"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="und-di-Vma" secondAttribute="trailing" constant="86" id="e9J-Yy-toV"/>
-                            <constraint firstItem="EKq-yM-Grf" firstAttribute="top" secondItem="und-di-Vma" secondAttribute="bottom" constant="26" id="re4-Z7-Jnd"/>
-                            <constraint firstItem="eHZ-ir-LwU" firstAttribute="leading" secondItem="und-di-Vma" secondAttribute="leading" id="xnj-2C-Xil"/>
+                            <constraint firstItem="EKq-yM-Grf" firstAttribute="centerX" secondItem="3g4-cd-RKK" secondAttribute="centerX" id="ftX-fo-U1v"/>
+                            <constraint firstItem="und-di-Vma" firstAttribute="leading" secondItem="eHZ-ir-LwU" secondAttribute="leading" id="hlH-oK-w0s"/>
+                            <constraint firstItem="EKq-yM-Grf" firstAttribute="top" secondItem="und-di-Vma" secondAttribute="bottom" constant="17" id="pXJ-qw-VLV"/>
                         </constraints>
                     </view>
                     <connections>

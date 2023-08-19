@@ -54,6 +54,12 @@ class ViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate 
     
     // MARK: Actions
     
+    @IBAction func generatorPassword(_ sender: Any) {
+        textField.isSecureTextEntry = true
+        label.text = ""
+        return textField.text = generatePassword(count: 3)
+    }
+   
     @IBAction func touchBruteForce(_ sender: Any) {
         if textField.text != "" {
             
@@ -82,12 +88,7 @@ class ViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate 
     @IBAction func onBut(_ sender: Any) {
         isBlack.toggle()
     }
-    @IBAction func touchGenerate(_ sender: Any) {
-        textField.isSecureTextEntry = true
-        label.text = ""
-        return textField.text = generatePassword(count: 3)
-    }
-
+    
     // MARK: BruteForce
     
     func bruteForce(passwordToUnlock: String) {
